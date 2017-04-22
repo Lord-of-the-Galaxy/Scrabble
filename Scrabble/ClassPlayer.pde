@@ -211,7 +211,6 @@ class Player {
             } else {
               next = extendVertical(s);
             }
-            words.add(w);
           }
           catch(NoWordException nwe) {
             continue;
@@ -354,7 +353,14 @@ class Player {
   //Somewhere about here I forgot my original plan, and I had forgotten to write it down preoperly :(
   Word extendAndCheckHorizontal(Cell s, Cell[] all) throws NoWordException, DiscontinuousWordException {
     int i = s.i;
-    if (grid[i-1][s.j].empty && grid[i+1][s.j].empty)throw new NoWordException();
+    boolean l = false, r = false;
+    if(i > 0){
+      l = grid[i-1][s.j].empty;
+    }
+    if(i < 14){
+      r = grid[i+1][s.j].empty;
+    }
+    if(l && r)throw new NoWordException();
     while (i > 0) {
       Cell c = grid[--i][s.j];
       if (c.empty)break;
@@ -392,7 +398,14 @@ class Player {
 
   Word extendVertical(Cell s) throws NoWordException {
     int j = s.j;
-    if (grid[s.i][j - 1].empty && grid[s.i][j + 1].empty)throw new NoWordException();
+    boolean u = false, d = false;
+    if(j > 0){
+      u = grid[s.i][j - 1].empty;
+    }
+    if(j < 14){
+      d = grid[s.i][j + 1].empty;
+    }
+    if(u && d)throw new NoWordException();
     while (j > 0) {
       Cell c = grid[s.i][--j];
       if (c.empty)break;
@@ -426,7 +439,14 @@ class Player {
   //Somewhere about here I forgot my original plan, and I had forgotten to write it down preoperly :(
   Word extendAndCheckVertical(Cell s, Cell[] all) throws NoWordException, DiscontinuousWordException {
     int j = s.j;
-    if (grid[s.i][j - 1].empty && grid[s.i][j + 1].empty)throw new NoWordException();
+    boolean u = false, d = false;
+    if(j > 0){
+      u = grid[s.i][j - 1].empty;
+    }
+    if(j < 14){
+      d = grid[s.i][j + 1].empty;
+    }
+    if(u && d)throw new NoWordException();
     while (j > 0) {
       Cell c = grid[s.i][--j];
       if (c.empty)break;

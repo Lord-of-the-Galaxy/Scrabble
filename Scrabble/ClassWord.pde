@@ -43,4 +43,9 @@ class Word {
     
     val = sb.toString();
   }
+  
+  @Override
+  String toString(){
+    return "Word: " + val + ", Score: " + score;
+  }
 }

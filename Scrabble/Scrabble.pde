@@ -3,7 +3,7 @@ import java.util.Collections;
 // main tab 
 
 final static float S = 40;//size of tile/space
-final static float XOFF = 15, YOFF = 15, P_XOFF = 680, P_YOFF = 30, P_W = 440, P_H = 80, P_H_A = 165, ST_Y = 480, ST_H = 220, ST_W = 400;
+final static float XOFF = 15, YOFF = 15, P_XOFF = 640, P_YOFF = 30, P_W = 440, P_H = 80, P_H_A = 165, ST_Y = 480, ST_H = 220, ST_W = 440, W_S_X = 1100, W_S_W = 160, W_S_Y = 320, W_S_H = 380;
 
 //change these colors at your discretion
 public static final color PEACH = #F7CE91;
