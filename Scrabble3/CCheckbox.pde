@@ -50,7 +50,7 @@ public abstract class CheckBox {
     if (evt.getAction() == MouseEvent.PRESS)this.mousePressed();
   }
 
-  void setActive22222222222222(boolean a) {
+  void setActive(boolean a) {
     // active = a;
     // return this;
   }

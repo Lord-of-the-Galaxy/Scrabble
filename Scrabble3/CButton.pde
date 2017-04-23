@@ -10,13 +10,21 @@ public abstract class Button {
   public Button(PApplet p, float x_, float y_, 
     float w_, float h_, 
     String t) {
+    this(p, x_, y_, w_, h_, t, true);
+  }
+
+  public Button(PApplet p, float x_, float y_, 
+    float w_, float h_, 
+    String t, boolean draw) {
     x = x_;
     y = y_;
     w = w_;
     h = h_;
     text = t;
-    p.registerMethod("draw", this);
-    p.registerMethod("mouseEvent", this);
+    if (draw) {
+      p.registerMethod("draw", this);
+      p.registerMethod("mouseEvent", this);
+    }
   }
 
   public void draw() {

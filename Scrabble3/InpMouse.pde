@@ -12,6 +12,10 @@ void mousePressed() {
   }//if
 
   for (int i = 0; i < letters.size(); letters.get(i++).mousePressed());
+  if(scrollbar){
+    btnUp.mousePressed();
+    btnDown.mousePressed();
+  }
 }
 
 void mouseReleased() {

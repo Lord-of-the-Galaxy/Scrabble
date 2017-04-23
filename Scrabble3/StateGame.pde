@@ -4,7 +4,9 @@
 boolean firstMove = true;
 
 void normalGame() {
-
+  
+  scrollbar = false;
+  
   background(0);
 
   //first draw the grid

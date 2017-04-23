@@ -5,13 +5,10 @@
 // for scrolling in the list 
 Button btnUp, btnDown;
 
-int start = 0; // for scrolling when words > 5
+boolean scrollbar = false, init = false;
 
-int wordsSize; 
-
-void showScoreTable(ArrayList<Word> words, PApplet p) {
-
-  btnUp = new Button(p, P_XOFF + ST_W, P_H + 410, 30, 30, "up") {
+void initScoreTable() {
+  btnUp = new Button(this, P_XOFF + ST_W - 35, ST_Y, 35, 35, str((char)0x25B2), false) {
     @Override 
       public void pressed() {
       start--;
@@ -19,13 +16,23 @@ void showScoreTable(ArrayList<Word> words, PApplet p) {
         start=0;
     }
   };
-  btnDown = new Button(p, P_XOFF + ST_W, P_H + 490, 30, 30, "dn") {
+  btnDown = new Button(this, P_XOFF + ST_W - 35, ST_Y + ST_H - 35, 35, 35, str((char)0x25BC), false) {
     @Override
       public void pressed() {
       start++;
       checkStart();
     }
   };
+
+  btnUp.setVisible(true); 
+  btnDown.setVisible(true);
+}
+
+int start = 0; // for scrolling when words > 5
+
+int wordsSize; 
+
+void showScoreTable(ArrayList<Word> words) {
 
   pushStyle();
   strokeWeight(3);
@@ -47,28 +54,27 @@ void showScoreTable(ArrayList<Word> words, PApplet p) {
 
   if (words.size() <= 5) {  
 
-    displayScrollableList(words);
+    //displayScrollableList(words);
 
-    /*
+
     textSize(22);
-     for (int i = 0; i < words.size(); i++) {
-     Word w = words.get(i);
-     if (mouse && mouseY > ST_Y + 35 + h*i && mouseY < ST_Y + 35 + h*(i+1)) {
-     pushStyle();
-     noStroke();
-     fill(GREEN);
-     if (i != 4)
-     rect(P_XOFF + 2, ST_Y + 37 + h*i, ST_W - 4, h - 2);
-     else 
-     rect(P_XOFF + 2, ST_Y + 37 + h*i, ST_W - 4, h - 2, 0, 0, 6, 6);
-     displayWordScoreBreakup(w);
-     popStyle();
-     }
-     text(w.val, P_XOFF + 20, ST_Y + 27 + h*(i+1));
-     text(":", P_XOFF + ST_W - 140, ST_Y + 30 + h*(i+1));
-     text(w.score, P_XOFF + ST_W - 20 - textWidth(str(w.score)), ST_Y + 27 + h*(i+1));
-     }
-     */
+    for (int i = 0; i < words.size(); i++) {
+      Word w = words.get(i);
+      if (mouse && mouseY > ST_Y + 35 + h*i && mouseY < ST_Y + 35 + h*(i+1)) {
+        pushStyle();
+        noStroke();
+        fill(GREEN);
+        if (i != 4)
+          rect(P_XOFF + 2, ST_Y + 37 + h*i, ST_W - 4, h - 2);
+        else 
+        rect(P_XOFF + 2, ST_Y + 37 + h*i, ST_W - 4, h - 2, 0, 0, 6, 6);
+        displayWordScoreBreakup(w);
+        popStyle();
+      }
+      text(w.val, P_XOFF + 20, ST_Y + 27 + h*(i+1));
+      text(":", P_XOFF + ST_W - 140, ST_Y + 30 + h*(i+1));
+      text(w.score, P_XOFF + ST_W - 40 - textWidth(str(w.score)), ST_Y + 27 + h*(i+1));
+    }
   } else {
     //TO BE COMPLETED // !!! ?????????????????
     displayScrollableList(words);
@@ -92,14 +98,12 @@ void displayScrollableList(ArrayList<Word> words) {
 
   wordsSize=words.size(); 
 
-  btnUp.setVisible(true); 
-  btnDown.setVisible(true); 
+  if (!init) {
+    initScoreTable();
+    init = true;
+  }
 
-  btnUp.draw(); 
-  btnDown.draw();
-
-  line(P_XOFF + ST_W/2, ST_Y + 32, 
-    P_XOFF + ST_W/2, ST_Y + ST_H);
+  scrollbar = true;
 
   textSize(22);
   int k=0; 
@@ -118,9 +122,20 @@ void displayScrollableList(ArrayList<Word> words) {
     }
     text(w.val, P_XOFF + 20, ST_Y + 27 + h*(k+1)); 
     text(":", P_XOFF + ST_W - 140, ST_Y + 30 + h*(k+1)); 
-    text(w.score, P_XOFF + ST_W - 20 - textWidth(str(w.score)), ST_Y + 27 + h*(k+1));
+    text(w.score, P_XOFF + ST_W - 40 - textWidth(str(w.score)), ST_Y + 27 + h*(k+1));
     k++;
-  }//for
+  }
+ 
+  stroke(DARK_BLUE);
+  strokeWeight(0.5);
+  fill(LIGHT_BLUE);
+ 
+ //TO DO - ADD A RECTANGLE TO REPRESENT THE POSITION OF THE SCROLLBAR
+ 
+  rect(P_XOFF + ST_W - 35, ST_Y, 35, ST_H, 6, 6, 6, 6);
+  
+  btnUp.draw(); 
+  btnDown.draw();//for
 }// func 
 
 void displayWordScoreBreakup(Word w) {

@@ -79,7 +79,7 @@ class Player {
         text(txt, P_XOFF+P_W - textWidth(txt) - 5, y+P_H_A-10-(txt.contains("\n")?S/2:0));
       }
       if (finish.visible && finish.active) {
-        showScoreTable(words, p);
+        showScoreTable(words);
       }
       popStyle();
     }
