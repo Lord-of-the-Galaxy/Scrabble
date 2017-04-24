@@ -14,6 +14,8 @@ class Player {
 
   String name=""; 
 
+  String nonExistantWord = "";
+
   ArrayList<Word> words = new ArrayList<Word>();
 
   int err = 0;
@@ -80,7 +82,7 @@ class Player {
       if (finish.visible && !finish.active && finish.hover()) {
         fill(RED);
         String txt = "Move is illegal!";
-        if (err != 0) txt = getErrorMessage(err);
+        if (err != 0) txt = getErrorMessage(err, nonExistantWord);
         text(txt, P_XOFF+P_W - textWidth(txt) - 5, y+P_H_A-10-(txt.contains("\n")?S/2:0));
       }
       if (finish.visible && finish.active) {
@@ -115,7 +117,7 @@ class Player {
   void ok() {
     int err = checkMove();
     if (err != 0) {
-      err(err, this);
+      err(err, nonExistantWord);
       this.err = err;
     }
   }
@@ -140,8 +142,8 @@ class Player {
       }
       Cell[] cells = new Cell[cells_temp.size()];
       cells_temp.toArray(cells);
-      for(Cell c : cells){
-        if(c.cur.blank && c.cur.val == ' ')return 661;
+      for (Cell c : cells) {
+        if (c.cur.blank && c.cur.val == ' ')return 661;
       }
       Cell temp = null;
       boolean v = true;
@@ -187,6 +189,15 @@ class Player {
         catch(DiscontinuousWordException dwe) {
           return 685;
         }
+        println("Checking words against dictionary");
+        for (Word word : words) {
+          if (!wordExists(word.val)) {
+            nonExistantWord = word.val;
+            return 651;
+          } else {
+            println("Word " + word.val + " exists!");
+          }
+        }
         finish.setActive(true);
         return 0;
       }
@@ -212,18 +223,18 @@ class Player {
           if (!ok) {
             int i = s.i;
             int j = s.j;
-            
+
             boolean u = false, d = false, l = false, r = false;
-            if(i < 14){
+            if (i < 14) {
               r = grid[i+1][j].used;
             }
-            if(i > 0){
+            if (i > 0) {
               l = grid[i-1][j].used;
             }
-            if(j < 14){
+            if (j < 14) {
               d = grid[i][j+1].used;
             }
-            if(j > 0){
+            if (j > 0) {
               u = grid[i][j-1].used;
             }
             if (u || d || l || r)ok = true;
@@ -266,6 +277,18 @@ class Player {
           words.add(hor);
         }
       }
+
+      //CHECK IF WORDS EXIST
+      println("Checking words against dictionary");
+      for (Word w : words) {
+        if (!wordExists(w.val)) {
+          nonExistantWord = w.val;
+          return 651;
+        } else {
+          println("Word " + w.val + " exists!");
+        }
+      }
+
       finish.setActive(true);
       return 0;
     } else return 689;
@@ -346,7 +369,7 @@ class Player {
       r = grid[i+1][s.j].empty;
     }
     if (l && r)throw new NoWordException();
-    
+
     while (i > 0) {
       Cell c = grid[i-1][s.j];
       if (c.empty)break;
@@ -388,13 +411,13 @@ class Player {
       r = grid[i+1][s.j].empty;
     }
     if (l && r)throw new NoWordException();
-    
+
     while (i > 0) {
       Cell c = grid[i-1][s.j];
       if (c.empty)break;
       i--;
     }
-    
+
     Cell word_start = grid[i][s.j];
     IntList checked = new IntList();
     Word w = new Word(word_start, false);
@@ -440,7 +463,7 @@ class Player {
       if (c.empty)break;
       j--;
     }
-    
+
     Cell word_start = grid[s.i][j];
     Word w = new Word(word_start, true);
     while (j < 15) {
@@ -477,7 +500,7 @@ class Player {
       d = grid[s.i][j + 1].empty;
     }
     if (u && d)throw new NoWordException();
-    
+
     while (j > 0) {
       Cell c = grid[s.i][j-1];
       if (c.empty)break;

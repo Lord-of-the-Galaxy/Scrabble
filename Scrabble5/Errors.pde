@@ -13,6 +13,9 @@ protected <T> void err(int index, T... vars) {
     case 311:
       System.err.println("This letter, " + vars[0].toString() + " is not a blank. You cannot set another value for it. Error in code!");
       break;
+    case 651:
+      System.err.println("Error 651: " + getErrorMessage(651, vars).replaceAll("\n", " "));
+      break;
     case 661:
       System.err.println("Error 661: " + getErrorMessage(661).replaceAll("\n", " "));
       break;
@@ -56,8 +59,10 @@ protected <T> void err(int index, T... vars) {
   }
 }
 
-String getErrorMessage(int err) {
+protected <T> String getErrorMessage(int err, T... vars) {
   switch(err) {
+  case 651:
+    return "The word " + vars[0].toString() + " does not exist.";  
   case 661:
     return  "You must set a letter for the\nblank by double-clicking it";
   case 681:
