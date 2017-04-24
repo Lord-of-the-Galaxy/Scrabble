@@ -140,6 +140,9 @@ class Player {
       }
       Cell[] cells = new Cell[cells_temp.size()];
       cells_temp.toArray(cells);
+      for(Cell c : cells){
+        if(c.cur.blank && c.cur.val == ' ')return 661;
+      }
       Cell temp = null;
       boolean v = true;
       for (int i = 0; i < cells.length; i++) {

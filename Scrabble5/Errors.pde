@@ -13,6 +13,9 @@ protected <T> void err(int index, T... vars) {
     case 311:
       System.err.println("This letter, " + vars[0].toString() + " is not a blank. You cannot set another value for it. Error in code!");
       break;
+    case 661:
+      System.err.println("Error 661: " + getErrorMessage(661).replaceAll("\n", " "));
+      break;
     case 671:
       System.err.println("Error 671: You ended up with a single letter first word. Error in code!");
       break;
@@ -20,16 +23,16 @@ protected <T> void err(int index, T... vars) {
       System.err.println("Error 681: All letters must be in a line");
       break;
     case 682:
-      System.err.println("Error 682: " + getErrorMessage(682).replaceAll("\n", ""));
+      System.err.println("Error 682: " + getErrorMessage(682).replaceAll("\n", " "));
       break;
     case 683:
-      System.err.println("Error 683: " + getErrorMessage(683).replaceAll("\n", ""));
+      System.err.println("Error 683: " + getErrorMessage(683).replaceAll("\n", " "));
       break; 
     case 684:
-      System.err.println("Error 684: " + getErrorMessage(684).replaceAll("\n", ""));
+      System.err.println("Error 684: " + getErrorMessage(684).replaceAll("\n", " "));
       break;  
     case 685:
-      System.err.println("Error 685: " + getErrorMessage(685).replaceAll("\n", ""));
+      System.err.println("Error 685: " + getErrorMessage(685).replaceAll("\n", " "));
       break;  
     case 689:
       System.err.println("Error 689: This isn't really an error ");
@@ -55,6 +58,8 @@ protected <T> void err(int index, T... vars) {
 
 String getErrorMessage(int err) {
   switch(err) {
+  case 661:
+    return  "You must set a letter for the\nblank by double-clicking it";
   case 681:
     return getErrorMessage(685);
   case 682:
