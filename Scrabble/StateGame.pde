@@ -5,6 +5,8 @@ boolean firstMove = true;
 
 void normalGame() {
 
+  scrollbar = false;
+
   background(0);
 
   //first draw the grid
@@ -14,15 +16,13 @@ void normalGame() {
     }
   }
 
-  //next the players
+  //next draw the players
   for (int i = 0; i < players.length; i++) {
     players[i].draw();
-    //players[i].drawLetters();
   }
 
   //letters are drawn last
-  for (int i = 0; i < letters.size(); i++) {
-    Letter currentLetter = letters.get(i);
+  for ( Letter currentLetter : letters) {  
     currentLetter.draw();
   }
 }//func
