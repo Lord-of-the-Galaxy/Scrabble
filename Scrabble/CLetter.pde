@@ -14,7 +14,7 @@ class Letter {
 
   final boolean blank;
 
-  Player p;//despite my best tries, had to add this :(
+  HumanPlayer p;//despite my best tries, had to add this :(
   int set_i;
 
   Letter(char v) {
@@ -138,7 +138,7 @@ class Letter {
     return this;
   }
 
-  Letter player(Player p_, int i) {
+  Letter player(HumanPlayer p_, int i) {
     p = p_;
     set_i = i;
     return this;
@@ -154,3 +154,16 @@ class Letter {
     return "Letter: " + val + ", Score: " + score;
   }
 }
+
+
+
+Cell closestCell(Letter l) {
+  
+  int i = (int)((l.x - XOFF)/S);
+  int j = (int)((l.y - YOFF)/S);
+  
+  if (i >= 0 && i < 15 && j >= 0 && j < 15)
+    return grid[i][j];
+  return null;
+}
+//
