@@ -6,7 +6,7 @@ public abstract class Button {
   float x, y, w, h;
   String text;
   boolean visible = false, 
-  active = true;  //i have my reasons
+    active = true;  //i have my reasons
 
   public Button(PApplet p, float x_, float y_, 
     float w_, float h_, 
@@ -22,6 +22,7 @@ public abstract class Button {
     w = w_;
     h = h_;
     text = t;
+
     if (draw) {
       p.registerMethod("draw", this);
       p.registerMethod("mouseEvent", this);

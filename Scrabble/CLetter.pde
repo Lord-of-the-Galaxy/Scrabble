@@ -120,11 +120,11 @@ class Letter {
         y = int(c.j*S + YOFF + S/2);
         if (c.empty)c.put(this);
         else {
-          x = (int)P_XOFF + 40 + set_i*(int)(S+2);//stupid, I know
+          x = (int)P_XOFF + 60 + set_i*(int)(S+2);//stupid, I know
           y = (int)(P_YOFF + p.index*P_H + (activePlayer<p.index?P_H_A-P_H:0) + P_H/2);
         }
       } else {
-        x = (int)P_XOFF + 40 + set_i*(int)(S+2);//stupid, I know
+        x = (int)P_XOFF + 60 + set_i*(int)(S+2);//stupid, I know
         y = (int)(P_YOFF + p.index*P_H + (activePlayer<p.index?P_H_A-P_H:0) + P_H/2);
       }
     }

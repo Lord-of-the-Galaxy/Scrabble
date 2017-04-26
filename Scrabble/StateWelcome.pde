@@ -85,12 +85,12 @@ void showWelcomeScreen() {
   fill(255);
   textAlign(LEFT);
   textSize(22); 
-  text("Two players make their moves alternating.\n"
+  text("Players make their moves alternating.\n"
     +"At the beginning click 'Draw Letters' to get 8 letters.\n"
     +"To make a move drag the letters from your 8 letter stack\n"
     +"to the big main field left. When you placed your word\n"
-    +"click 'Finish move' and 'Move OK'.\n\n"
-    +"You receive new letters until you have 8 letters again.\n"
+    +"click 'Finish move' and then 'Move OK'.\n\n"
+    +"You receive new letters until you have 7 letters again.\n"
     +"Now it's your friend's turn to make a move.\n\n", 280+40, 422);
 
   // display IV
