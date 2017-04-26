@@ -14,7 +14,7 @@ class Letter {
 
   final boolean blank;
 
-  HumanPlayer p;//despite my best tries, had to add this :(
+  Player p;//despite my best tries, had to add this :(
   int set_i;
 
   Letter(char v) {
@@ -138,7 +138,7 @@ class Letter {
     return this;
   }
 
-  Letter player(HumanPlayer p_, int i) {
+  Letter player(Player p_, int i) {
     p = p_;
     set_i = i;
     return this;

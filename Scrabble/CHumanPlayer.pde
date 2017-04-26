@@ -1,7 +1,7 @@
 
 // tab HumanPlayer 
 
-class HumanPlayer {
+class HumanPlayer extends Player{
 
   Letter[] set;
   Button ok, finish, revert;
@@ -25,13 +25,7 @@ class HumanPlayer {
   boolean isPlayedByComputer=false; 
 
   HumanPlayer(PApplet p_, int i) {
-    index = i;
-    set = new Letter[8];
-
-    p=p_; 
-
-    score = 0;
-
+    super(p_, i);
     finish = new Button(p, P_XOFF + 40, index*P_H + 110, 120, 30, "Move OK") {
       @Override
         void pressed() {
@@ -336,200 +330,7 @@ class HumanPlayer {
     ok.setVisible(false);
     finish.setVisible(false);
     revert.setVisible(false);
-    activePlayer = (index+1)%players.length;
-    players[activePlayer].activate();
-    if (activePlayer == 0) {
-      for (int i = 1; i < players.length; i++) {
-        players[i].moveLetters();
-      }
-    } else {
-      players[activePlayer].moveLetters();
-    }
-  }
-
-  void moveLetters() {
-    int x = (int)P_XOFF + 40;//stupid, I know
-    int y = (int)(P_YOFF + this.index*P_H + (activePlayer<index?P_H_A-P_H:0) + P_H/2);
-    for (int i = 0; i < 8; i++) {
-      set[i].show(x + (int)(S+2)*i, y);
-    }
-  }
-
-  Word extendHorizontal(Cell s) throws NoWordException {
-    int i = s.i;
-    boolean l = true, r = true;
-    if (i > 0) {
-      l = grid[i-1][s.j].empty;
-    }
-    if (i < 14) {
-      r = grid[i+1][s.j].empty;
-    }
-    if (l && r)throw new NoWordException();
-
-    while (i > 0) {
-      Cell c = grid[i-1][s.j];
-      if (c.empty)break;
-      i--;
-    }
-    Cell word_start = grid[i][s.j];
-    Word w = new Word(word_start, false);
-    while (i < 15) {
-      Cell c = grid[i++][s.j];
-      if (c.empty)break;
-      int m_temp = 1;
-      if (!c.used) {
-        if (c.type == gridDoubleLetter) {
-          m_temp = 2;
-        } else if (c.type == gridTripleLetter) {
-          m_temp = 3;
-        }
-
-        if (c.type == gridDoubleWord || c.type == gridStar) {
-          w.mult(2);
-        } else if (c.type == gridTripleWord) {
-          w.mult(3);
-        }
-      }
-      w.add(c.cur.val, c.cur.score, m_temp);
-    }
-    w.init();
-    return w;
-  }
-
-  //Somewhere about here I forgot my original plan, and I had forgotten to write it down preoperly :(
-  Word extendAndCheckHorizontal(Cell s, Cell[] all) throws NoWordException, DiscontinuousWordException {
-    int i = s.i;
-    boolean l = true, r = true;
-    if (i > 0) {
-      l = grid[i-1][s.j].empty;
-    }
-    if (i < 14) {
-      r = grid[i+1][s.j].empty;
-    }
-    if (l && r)throw new NoWordException();
-
-    while (i > 0) {
-      Cell c = grid[i-1][s.j];
-      if (c.empty)break;
-      i--;
-    }
-
-    Cell word_start = grid[i][s.j];
-    IntList checked = new IntList();
-    Word w = new Word(word_start, false);
-    while (i < 15) {
-      Cell c = grid[i++][s.j];
-      if (c.empty)break;
-      checked.append(i-1);
-      int m_temp = 1;
-      if (!c.used) {
-        if (c.type == gridDoubleLetter) {
-          m_temp = 2;
-        } else if (c.type == gridTripleLetter) {
-          m_temp = 3;
-        }
-
-        if (c.type == gridDoubleWord || c.type == gridStar) {
-          w.mult(2);
-        } else if (c.type == gridTripleWord) {
-          w.mult(3);
-        }
-      }
-      w.add(c.cur.val, c.cur.score, m_temp);
-    }
-    w.init();
-    for (int n = 0; n < all.length; n++) {
-      if (!checked.hasValue(all[n].i))throw new DiscontinuousWordException();
-    }
-    return w;
-  }
-
-  Word extendVertical(Cell s) throws NoWordException {
-    int j = s.j;
-    boolean u = true, d = true;
-    if (j > 0) {
-      u = grid[s.i][j - 1].empty;
-    }
-    if (j < 14) {
-      d = grid[s.i][j + 1].empty;
-    }
-    if (u && d)throw new NoWordException();
-    while (j > 0) {
-      Cell c = grid[s.i][j-1];
-      if (c.empty)break;
-      j--;
-    }
-
-    Cell word_start = grid[s.i][j];
-    Word w = new Word(word_start, true);
-    while (j < 15) {
-      Cell c = grid[s.i][j++];
-      if (c.empty)break;
-      int m_temp = 1;
-      if (!c.used) {
-        if (c.type == gridDoubleLetter) {
-          m_temp = 2;
-        } else if (c.type == gridTripleLetter) {
-          m_temp = 3;
-        }
-
-        if (c.type == gridDoubleWord || c.type == gridStar) {
-          w.mult(2);
-        } else if (c.type == gridTripleWord) {
-          w.mult(3);
-        }
-      }
-      w.add(c.cur.val, c.cur.score, m_temp);
-    }
-    w.init();
-    return w;
-  }
-
-  //Somewhere about here I forgot my original plan, and I had forgotten to write it down preoperly :(
-  Word extendAndCheckVertical(Cell s, Cell[] all) throws NoWordException, DiscontinuousWordException {
-    int j = s.j;
-    boolean u = true, d = true;
-    if (j > 0) {
-      u = grid[s.i][j - 1].empty;
-    }
-    if (j < 14) {
-      d = grid[s.i][j + 1].empty;
-    }
-    if (u && d)throw new NoWordException();
-
-    while (j > 0) {
-      Cell c = grid[s.i][j-1];
-      if (c.empty)break;
-      j--;
-    }
-    Cell word_start = grid[s.i][j];
-    IntList checked = new IntList();
-    Word w = new Word(word_start, true);
-    while (j < 15) {
-      Cell c = grid[s.i][j++];
-      if (c.empty)break;
-      checked.append(j-1);
-      int m_temp = 1;
-      if (!c.used) {
-        if (c.type == gridDoubleLetter) {
-          m_temp = 2;
-        } else if (c.type == gridTripleLetter) {
-          m_temp = 3;
-        }
-
-        if (c.type == gridDoubleWord || c.type == gridStar) {
-          w.mult(2);
-        } else if (c.type == gridTripleWord) {
-          w.mult(3);
-        }
-      }
-      w.add(c.cur.val, c.cur.score, m_temp);
-    }
-    w.init();
-    for (int n = 0; n < all.length; n++) {
-      if (!checked.hasValue(all[n].j))throw new DiscontinuousWordException();
-    }
-    return w;
+    super.deactivate();
   }
 }
 //
