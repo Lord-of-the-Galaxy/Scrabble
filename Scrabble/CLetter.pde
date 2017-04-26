@@ -11,6 +11,7 @@ class Letter {
   boolean visible = false;
   boolean active = false;
   boolean dragging = false;
+  boolean activeForAI = false;
 
   final boolean blank;
 
@@ -50,10 +51,13 @@ class Letter {
 
       pushStyle();
       fill(PEACH);
-      stroke(DARK_BLUE);
-      if (active)
+      if(active){
+        stroke(DARK_BLUE);
         strokeWeight(2);
-      else noStroke();
+      }else if(activeForAI){
+        stroke(RED);
+        strokeWeight(2);
+      }else noStroke();
       rectMode(CENTER);
       if (active)
         rect(x, y, S, S, 4);
@@ -152,6 +156,10 @@ class Letter {
   @Override
     String toString() {
     return "Letter: " + val + ", Score: " + score;
+  }
+  
+  void activeForAI(boolean a){
+    activeForAI = a;
   }
 }
 

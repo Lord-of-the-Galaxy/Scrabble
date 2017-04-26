@@ -11,8 +11,10 @@ protected <T> void err(int index, T... vars) {
       System.err.println("Error 232: There is no letter in this cell, " + vars[0].toString() + ". This shouldn't be happening. Error in code!");
       break;
     case 311:
-      System.err.println("This letter, " + vars[0].toString() + " is not a blank. You cannot set another value for it. Error in code!");
+      System.err.println("Error 311: This letter, " + vars[0].toString() + " is not a blank. You cannot set another value for it. Error in code!");
       break;
+    case 561:
+      System.err.println("Error 561: The AI cannot move " + vars[0] + " that does not belong to the player.");
     case 651:
       System.err.println("Error 651: " + getErrorMessage(651, vars).replaceAll("\n", " "));
       break;
