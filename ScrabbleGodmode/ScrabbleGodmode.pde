@@ -1,10 +1,18 @@
+import java.util.concurrent.ConcurrentLinkedQueue;
+import java.util.Queue;
 import javax.swing.JOptionPane;
 
-// SCRABBLE
+// SCRABBLE - GODMODE
+// Here, you test AI against yourself, and can test AIs against each other also
+// You can also create any situation you want and load it into the game
+// However, loaded situations don't take into account the fact that it uses up letters to make words, so all letters remain in pile
+// This will change soon, and be with a choice.
+// Open the Game tab to instantiate your AIs
+
+
+final static boolean GODMODE = true;//set to true if you want to load a situation, example provided in "data/situations/" folder
 
 // main tab
-
-import java.util.Collections;
 
 //size of tile/space
 final static float S = 40;
@@ -36,11 +44,13 @@ public static final color TEXT_BOX_BORDER_COLOR = #000000;
 public static final color TEXT_BOX_FOCUSED_BORDER_COLOR = DARK_BLUE;
 
 // program states
+/** not required for Godmode
 final int startScreen = 0; // constants must be unique numbers 
 final int options     = 1; 
 final int normalGame  = 2; 
 final int gameOver    = 3; 
 int state = startScreen;   // current 
+*/
 
 HashMap<Character, Integer> values = new HashMap<Character, Integer>();
 
@@ -50,52 +60,30 @@ ArrayList<Letter> pile = new ArrayList<Letter>();
 //harcoded because we're using official scrabble pattern of double/triple words/letters
 Cell[][] grid = new Cell[15][15];
 
-HumanPlayer[] players;
+Player[] players;
 int activePlayer = 0;
 
 // ---------------------------------------------------------------
 
 void setup() {
 
-  size(1280, 720);
+  size(1280, 720, FX2D);
 
   initLetters();
   initGrid();
-  initDictionary(); 
-  initWelcomeScreen(); 
-
+  initDictionary();
+  
+  if(GODMODE){
+    loadProgram();
+    firstMove = false;//VERY IMPORTANT THAT THE STAR IS COVERED IN THE SITUATION
+  }
+  
+  addPlayers();
+  
   background(0);
 }
 
 void draw() {
-  switch(state) {
-
-  case startScreen:
-    // start screen
-    showWelcomeScreen();
-    break; 
-
-  case options: 
-    // enter names 
-    showOptions(); 
-    break;
-
-  case normalGame:
-    // Game 
-    normalGame();
-    break; 
-
-  case gameOver:
-    // display message
-    showGameOver(); 
-    break;   
-
-  default:
-    // error
-    err(971, state);
-    exit(); 
-    break;
-  } // switch 
-  //
+   normalGame();
 }//func
 //

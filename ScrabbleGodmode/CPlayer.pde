@@ -51,6 +51,11 @@ abstract class Player {
       popStyle();
     } else {
       pushStyle();
+      fill(LIGHT_GREEN);
+      stroke(DARK_GREEN);
+      strokeWeight(2);
+      float y = index*P_H + P_YOFF;
+      rect(P_XOFF, y, P_W, P_H_A, 6);
       displayActive();
       if (checked) {
         showScoreTable(words);
@@ -66,10 +71,10 @@ abstract class Player {
     text(score, P_XOFF + P_W - 25 - textWidth(str(score))/2, y + (activePlayer == index?P_H_A:P_H)/2 + 0.3*S);
     popStyle();
   }
-  
-  
+
+
   abstract void displayActive();//Human and AI have different
-  
+
   void drawLetters() {
 
     int x = (int)P_XOFF + 60;

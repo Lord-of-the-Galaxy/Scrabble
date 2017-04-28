@@ -142,7 +142,6 @@ void initLetters() {
   generateXLetters('Z', 1);
   generateXLetters(' ', 2);
   
-  Collections.shuffle(pile);
   println("Contents of pile:");
   for(int i = 0; i < pile.size(); println(pile.get(i++)));
 }

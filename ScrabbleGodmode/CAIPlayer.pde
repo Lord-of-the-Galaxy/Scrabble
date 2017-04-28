@@ -11,7 +11,7 @@ abstract class AIPlayer extends Player implements Runnable{
   AIPlayer(PApplet p, int i) {
     super(p, i);
     actions = new ConcurrentLinkedQueue<Action>();
-    bar = new ProgressBar(new PVector(P_XOFF + S, index*P_H + 110), P_W - 2*S);
+    bar = new ProgressBar(new PVector(P_XOFF + S, index*P_H + 110), 7*S);
     bar.setColors(color(255), DARK_BLUE, LIGHT_BLUE);
     bar.setMinMax(0, 100);
     ai_grid = new AICell[15][15];

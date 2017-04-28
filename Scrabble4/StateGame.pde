@@ -14,7 +14,7 @@ void normalGame() {
     if (firstTimeGodmode) {
 
       firstTimeGodmode=false;
-      
+
       printArray(list);
 
       for (int i = 0; i < 15; i++) {
@@ -24,7 +24,9 @@ void normalGame() {
             //grid[i][j].empty = false;
             //grid[i][j].used = true;
             println (i+", "+j);
-            grid[i][j].put ( new Letter( list[j].charAt(i) ));
+            int x = int(i*S + XOFF + S/2);
+            int y = int(j*S + YOFF + S/2);
+            grid[i][j].put ( new Letter( list[j].charAt(i) ).show(x, y));
             grid[i][j].save();
           }//if
         }

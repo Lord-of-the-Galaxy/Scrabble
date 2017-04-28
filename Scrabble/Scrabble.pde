@@ -1,3 +1,5 @@
+import java.util.Queue;
+import java.util.concurrent.ConcurrentLinkedQueue;
 import javax.swing.JOptionPane;
 
 // SCRABBLE
@@ -50,7 +52,7 @@ ArrayList<Letter> pile = new ArrayList<Letter>();
 //harcoded because we're using official scrabble pattern of double/triple words/letters
 Cell[][] grid = new Cell[15][15];
 
-HumanPlayer[] players;
+Player[] players;
 int activePlayer = 0;
 
 // ---------------------------------------------------------------

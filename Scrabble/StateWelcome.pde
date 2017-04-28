@@ -31,7 +31,7 @@ void initWelcomeScreen() {
   buttonsStartScreen[0] =  new Button(this, width-150, height-200, 144, 30, "2 Players") {
     public void pressed() {
       //what to do when button is pressed
-      players = new HumanPlayer[2];
+      players = new Player[2];
       addPlayers() ;
       instantiateBoxes();
       defineButtons(); 
@@ -42,7 +42,7 @@ void initWelcomeScreen() {
   buttonsStartScreen[1] = new Button(this, width-150, height-160, 144, 30, "3 Players") {
     public void pressed() {
       //what to do when button is pressed
-      players = new HumanPlayer[3];
+      players = new Player[3];
       addPlayers();
       instantiateBoxes();
       defineButtons(); 
@@ -53,7 +53,7 @@ void initWelcomeScreen() {
   buttonsStartScreen[2] =  new Button(this, width-150, height-120, 144, 30, "4 Players") {
     public void pressed() {
       //what to do when button is pressed
-      players = new HumanPlayer[4];
+      players = new Player[4];
       addPlayers() ;
       instantiateBoxes();
       defineButtons(); 

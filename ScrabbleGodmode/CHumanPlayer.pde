@@ -30,11 +30,7 @@ class HumanPlayer extends Player {
   }
 
   void displayActive() {
-    fill(LIGHT_GREEN);
-    stroke(DARK_GREEN);
-    strokeWeight(2);
     float y = index*P_H + P_YOFF;
-    rect(P_XOFF, y, P_W, P_H_A, 6);
     fill(0); 
     textSize(0.4*S);
     text(name + (isPlayedByComputer ? " (PC)" : ""), P_XOFF+4, y+P_H_A-6);
@@ -82,6 +78,7 @@ class HumanPlayer extends Player {
     for (int i = 0; i < 7; i++) {
       set[i].active(true);
     }
+    checked = false;
     reverting = true;
   }
 
