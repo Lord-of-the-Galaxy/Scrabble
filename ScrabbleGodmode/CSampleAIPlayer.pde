@@ -18,6 +18,7 @@ class SampleAIPlayer extends AIPlayer{
     println(listType[c.type]);
     
     //Move a letter on the screen
+    //moveLetter();//TODO - To be updated
     
     //NOW USE ALL THIS FRAMEWORK TO CREATE YOUR OWN AI FOR SCRABBLE!
   }
