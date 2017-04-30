@@ -66,17 +66,17 @@ protected <T> String getErrorMessage(int err, T... vars) {
   case 651:
     return "The word " + vars[0].toString() + " does not exist.";  
   case 661:
-    return  "You must set a letter for the\nblank by double-clicking it";
+    return  "You must set a letter for the blank\nby double-clicking it";
   case 681:
     return getErrorMessage(685);
   case 682:
-    return "You must place a letter on the\nstarting square (STAR) in the first move";
+    return "You must place a letter on the starting\nsquare (STAR) in the first move";
   case 683: 
     return "All words must have at least 2 letters";
   case 684:
     return "The word formed should touch other words";
   case 685:
-    return "All letters you place must be\nin a line, with no breaks in it";
+    return "All letters you place must be in a\nline, with no breaks in it";
   }
   return str(err) + "?";
 }

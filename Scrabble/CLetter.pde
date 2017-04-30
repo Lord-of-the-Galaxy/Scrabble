@@ -51,13 +51,13 @@ class Letter {
 
       pushStyle();
       fill(PEACH);
-      if(active){
+      if (active) {
         stroke(DARK_BLUE);
         strokeWeight(2);
-      }else if(activeForAI){
+      } else if (activeForAI) {
         stroke(RED);
         strokeWeight(2);
-      }else noStroke();
+      } else noStroke();
       rectMode(CENTER);
       if (active)
         rect(x, y, S, S, 4);
@@ -90,10 +90,10 @@ class Letter {
       int count = 0;
       char c = ' ';
       while ((s == null || c == ' ') && count < 3) {
-        if(count != 0)JOptionPane.showMessageDialog(null, "Please enter a valid character");
+        if (count != 0)JOptionPane.showMessageDialog(null, "Please enter a valid character");
         count++;
         s = JOptionPane.showInputDialog("Enter the value you want to use for the blank:");
-        if(s == null)continue;
+        if (s == null)continue;
         s = s.toUpperCase();
         if ((int)s.charAt(0) >= 65 && (int)s.charAt(0) <= 90)c = s.charAt(0);
       }
@@ -124,21 +124,31 @@ class Letter {
         y = int(c.j*S + YOFF + S/2);
         if (c.empty)c.put(this);
         else {
-          x = (int)P_XOFF + 60 + set_i*(int)(S+2);//stupid, I know
-          y = (int)(P_YOFF + p.index*P_H + (activePlayer<p.index?P_H_A-P_H:0) + P_H/2);
+          x = (int)P_XOFF + 40 + set_i*(int)(S+2);
+          y = (int)(P_YOFF + p.index*P_H  + S*0.9);
         }
       } else {
-        x = (int)P_XOFF + 60 + set_i*(int)(S+2);//stupid, I know
-        y = (int)(P_YOFF + p.index*P_H + (activePlayer<p.index?P_H_A-P_H:0) + P_H/2);
+        x = (int)P_XOFF + 40 + set_i*(int)(S+2);
+        y = (int)(P_YOFF + p.index*P_H  + S*0.9);
       }
     }
     //more logic to come
   }
-
+  
+  Letter show(){
+    visible = true;
+    return this;
+  }
+  
   Letter show(int x_, int y_) {
     visible = true;
     x = x_;
     y = y_;
+    return this;
+  }
+
+  Letter hide() {
+    visible = false;
     return this;
   }
 
@@ -157,8 +167,8 @@ class Letter {
     String toString() {
     return "Letter: " + val + ", Score: " + score;
   }
-  
-  void activeForAI(boolean a){
+
+  void activeForAI(boolean a) {
     activeForAI = a;
   }
 }
@@ -166,10 +176,10 @@ class Letter {
 
 
 Cell closestCell(Letter l) {
-  
+
   int i = (int)((l.x - XOFF)/S);
   int j = (int)((l.y - YOFF)/S);
-  
+
   if (i >= 0 && i < 15 && j >= 0 && j < 15)
     return grid[i][j];
   return null;

@@ -35,9 +35,9 @@ abstract class Player {
   void draw() {
 
     // draw player 
-
+    
+    pushStyle();
     if (activePlayer != index) {
-      pushStyle();
       fill(LIGHT_GREEN);
       stroke(DARK_GREEN);
       strokeWeight(3);
@@ -46,24 +46,20 @@ abstract class Player {
         y += P_H_A-P_H;
       rect(P_XOFF, y, P_W, P_H, 6);
       fill(0); 
-      textSize(0.4*S);
-      text(name + (isPlayedByComputer ? " (AI)" : ""), P_XOFF+4, y+P_H-5); 
-      popStyle();
+      textSize(0.5*P_H);
+      text(name + (isPlayedByComputer ? " (AI)" : ""), P_XOFF+4, y+P_H-10); 
     } else {
-      pushStyle();
       displayActive();
       if (checked) {
         showScoreTable(words);
       }
-      popStyle();
     }
-    pushStyle();
     float y = index*P_H + P_YOFF;
     if (activePlayer < index)
       y += P_H_A-P_H;
-    textSize(0.6*S);
+    textSize(0.5*P_H);
     fill(0);
-    text(score, P_XOFF + P_W - 25 - textWidth(str(score))/2, y + (activePlayer == index?P_H_A:P_H)/2 + 0.3*S);
+    text(score, P_XOFF + P_W - 25 - textWidth(str(score))/2, y+P_H + (activePlayer==index?P_H_A-P_H:0) -10);
     popStyle();
   }
   
@@ -72,8 +68,8 @@ abstract class Player {
   
   void drawLetters() {
 
-    int x = (int)P_XOFF + 60;
-    int y = (int)(P_YOFF + this.index*P_H + (activePlayer<index?P_H_A-P_H:0) + P_H/2);
+    int x = (int)P_XOFF + 40;
+    int y = (int)(P_YOFF + this.index*P_H  + S*0.9);
 
     for (int i = 0; i < 7; i++) {
       int r = (int)random(pile.size());
@@ -81,7 +77,7 @@ abstract class Player {
       pile.remove(r);
       set[i].show(x + (int)(S+2)*i, y);
       set[i].player(this, i);
-      //if (activePlayer == index)set[i].active(true);
+      set[i].hide();
     }
   }
 
@@ -246,8 +242,8 @@ abstract class Player {
     for (int i = 0; i < 7; i++) {
       if (closestCell(set[i]) != null) replace.append(i);
     }
-    int x = (int)P_XOFF + 60;//stupid, I know
-    int y = (int)(P_YOFF + this.index*P_H + (activePlayer<index?P_H_A-P_H:0) + P_H/2);
+    int x = (int)P_XOFF + 40;
+    int y = (int)(P_YOFF + this.index*P_H  + S*0.9);
     for (int i = 0; i < replace.size(); i++) {
       int index = replace.get(i);
       closestCell(set[index]).save();
@@ -256,6 +252,7 @@ abstract class Player {
       pile.remove(r);
       set[index].show(x + (int)(S+2)*index, y);
       set[index].player(this, index);
+      set[index].hide();
     }
     for (int i = 0; i < words.size(); i++) {
       score+=words.get(i).score;
@@ -270,20 +267,8 @@ abstract class Player {
   void deactivate() {
     activePlayer = (index+1)%players.length;
     players[activePlayer].activate();
-    if (activePlayer == 0) {
-      for (int i = 1; i < players.length; i++) {
-        players[i].moveLetters();
-      }
-    } else {
-      players[activePlayer].moveLetters();
-    }
-  }
-
-  void moveLetters() {
-    int x = (int)P_XOFF + 60;//stupid, I know
-    int y = (int)(P_YOFF + this.index*P_H + (activePlayer<index?P_H_A-P_H:0) + P_H/2);
-    for (int i = 0; i < 7; i++) {
-      set[i].show(x + (int)(S+2)*i, y);
+    for(int i = 0; i < 7; i++){
+      set[i].hide();
     }
   }
 
