@@ -1,15 +1,54 @@
-_______________
-_______________
-_______________
-_______________
-_______P_______
-_______L_______
-_______A_______
-_______N_______
-_______E_______
-_______R_______
-_______________
-_______________
-_______________
-_______________
-_______________
+// Comments start with "//", and last till the end of the line
+
+// Empty lines are ignored, like comments
+
+/* 
+This is a multi-line comment
+See
+*/
+
+/*
+The state of the board starts and ends with '*B'. 
+It must have atleast 15 lines in between, but extra lines are ignored.
+Each line must contain 15 characters, but extra characters are ignored.
+Any mistakes in syntax will lead to errors.
+'-' will leave the cell empty, otherwise it will be filled with the given letter
+*/
+
+*B
+--------------- 
+---------------
+---------------
+---------------
+-------P-------
+-------L-------
+-------A-------
+-------N-------
+-------E-------
+-------R-------
+---------------
+---------------
+---------------
+---------------
+---------------
+*B
+
+// No of players if defined as such (3 here) - 
+*P 3
+
+// Player letters are defined as such (the number after *P refers to which player - 
+*P1 AOLIK_S //where _ is a blank. More than 7 letters are ignored, but if less than 7 are defined, new letters will be added from pile when possible
+
+// Despite @Chrisir's wishes, I decided that letting the AI have all 7 letters is more correct, than allowing user to make the AI have fewer letters at start.
+// This was because I reasoned that a good AI will depend a bit on judging what letters remain in pile + players pool.
+// Due to this, I also decided to add a "Show letters" feature by which a Player's letters will only be shown on clicking a button.
+
+// Note that the parser does account for the number of letters in the pile, and will remove any taken letters from the pile
+// So if any letter doesn't exist in pile, it will cause errors
+
+// You can also skip a player, they will be assigned letters from the pile - 
+*P3 HUTJYFD //Player 2 is skipped here
+
+
+
+
