@@ -2,7 +2,7 @@
 The game [Scrabble](https://en.wikipedia.org/wiki/Scrabble).  
   
 ## Download and Install  
-Download the program specific to your OS from [here](https://github.com/Lord-of-the-Galaxy/Scrabble/releases/tag/v0.1.0b), extract the .zip file and run Scrabble.exe.  
+Download the program specific to your OS from [here](https://github.com/Lord-of-the-Galaxy/Scrabble/releases/tag/latest), extract the .zip file and run Scrabble.exe.  
   
 I'll be writing an installer for Scrabble once the project itself reaches a stable state. 
   
