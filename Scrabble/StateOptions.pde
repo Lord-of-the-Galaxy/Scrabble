@@ -5,7 +5,7 @@ TextBox[] tboxes;
 int idx; // index for current tbox
 
 // same number of check boxes as text boxes 
-CheckBox[] checkBoxesOptionsScreen;
+//CheckBox[] checkBoxesOptionsScreen;
 
 // ONE button 
 Button[] buttonsOptionsScreen = new Button[1];   
@@ -14,7 +14,7 @@ Button[] buttonsOptionsScreen = new Button[1];
 void instantiateBoxes() {
 
   tboxes = new TextBox[players.length]; 
-  checkBoxesOptionsScreen = new CheckBox[players.length];
+  //checkBoxesOptionsScreen = new CheckBox[players.length];
 
   for (int i = 0; i < players.length; i++) {
 
@@ -27,8 +27,7 @@ void instantiateBoxes() {
       TEXT_BOX_BORDER_COLOR, TEXT_BOX_FOCUSED_BORDER_COLOR, // bordC, slctC 
       players[i].name);
 
-    checkBoxesOptionsScreen[i] = new CheckBox( this, 270 + i * 66, i*129+224, 33, 33, false, 
-      "Computer Player?");
+    //checkBoxesOptionsScreen[i] = new CheckBox( this, 270 + i * 66, i*129+224, 33, 33, false, "Computer Player?");
   }//for
 }
 
@@ -62,15 +61,15 @@ void showOptions() {
 
   for (int i = 0; i < players.length; i++) {
 
-    checkBoxesOptionsScreen[i].draw();
+    //checkBoxesOptionsScreen[i].draw();
 
-    if (checkBoxesOptionsScreen[i].value)
-      tboxes[i].title=  "Please enter this AI's name: ";
-    else 
+    //if (checkBoxesOptionsScreen[i].value)
+      //tboxes[i].title=  "Please enter this AI's name: ";
+    //else 
     tboxes[i].title=  "Player "+str(i+1) + ", please enter your name: ";
 
     //TODO - ADD PROPER AI FRAMEWORK
-    players[i].isPlayedByComputer = checkBoxesOptionsScreen[i].value;
+    //players[i].isPlayedByComputer = checkBoxesOptionsScreen[i].value;
 
     tboxes[i].display();
   } //for

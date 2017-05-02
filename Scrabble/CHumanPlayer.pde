@@ -26,7 +26,7 @@ class HumanPlayer {
 
   HumanPlayer(PApplet p_, int i) {
     index = i;
-    set = new Letter[8];
+    set = new Letter[7];
 
     p=p_; 
 
@@ -103,7 +103,7 @@ class HumanPlayer {
     int x = (int)P_XOFF + 40;
     int y = (int)(P_YOFF + this.index*P_H + (activePlayer<index?P_H_A-P_H:0) + P_H/2);
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 7; i++) {
       int r = (int)random(pile.size());
       set[i] = pile.get(r);
       pile.remove(r);
@@ -130,12 +130,12 @@ class HumanPlayer {
       revert.setVisible(true);
       ok.setVisible(false);
 
-      for (int i = 0; i < 8; i++) {
+      for (int i = 0; i < 7; i++) {
         set[i].active(false);
       }
       words.clear();
       ArrayList<Cell> cells_temp = new ArrayList<Cell>();
-      for (int i = 0; i < 8; i++) {
+      for (int i = 0; i < 7; i++) {
         if (closestCell(set[i]) != null) {
           cells_temp.add(closestCell(set[i]));
         }
@@ -293,7 +293,7 @@ class HumanPlayer {
 
   void finish() {
     IntList replace = new IntList();
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 7; i++) {
       if (closestCell(set[i]) != null) replace.append(i);
     }
     int x = (int)P_XOFF + 40;//stupid, I know
@@ -319,7 +319,7 @@ class HumanPlayer {
     revert.setVisible(false);
     ok.setVisible(true);
 
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 7; i++) {
       set[i].active(true);
     }
     reverting = true;
@@ -327,7 +327,7 @@ class HumanPlayer {
 
   void activate() {
     ok.setVisible(true);
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 7; i++) {
       set[i].active(true);
     }
   }
@@ -350,7 +350,7 @@ class HumanPlayer {
   void moveLetters() {
     int x = (int)P_XOFF + 40;//stupid, I know
     int y = (int)(P_YOFF + this.index*P_H + (activePlayer<index?P_H_A-P_H:0) + P_H/2);
-    for (int i = 0; i < 8; i++) {
+    for (int i = 0; i < 7; i++) {
       set[i].show(x + (int)(S+2)*i, y);
     }
   }
