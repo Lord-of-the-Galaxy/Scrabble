@@ -21,7 +21,7 @@ class HumanPlayer extends Player {
         revert();
       }
     };
-    
+
     ok = new Button(p, P_XOFF + 80, P_YOFF + index*P_H + 70, 180, 30, "Check move") {
       @Override
         void pressed() {
@@ -69,16 +69,19 @@ class HumanPlayer extends Player {
         set[i].active(false);
       }
       int err = checkMove();
-      if (words.size() == 0) finish.setText("Pass");
-      else finish.setText("Move OK");
       if (err != 0) {
         err(err, nonExistantWord);
         this.err = err;
-        if(words.size() == 0 && firstMove){
+        if (words.size() == 0 && firstMove) {
           finish.setActive(true);
           firstMovePass = true;
+          finish.setText("Pass");
         }
-      } else finish.setActive(true);
+      } else {
+        finish.setActive(true);
+        if (words.size() == 0) finish.setText("Pass");
+        else finish.setText("Move OK");
+      }
     }
   }
 
@@ -101,11 +104,11 @@ class HumanPlayer extends Player {
       set[i].active(true);
     }
   }
-  
-  void activate(){
+
+  void activate() {
     show.setVisible(true);
   }
-  
+
   @Override
     void deactivate() {
     ok.setVisible(false);

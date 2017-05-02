@@ -69,16 +69,19 @@ class HumanPlayer extends Player {
         set[i].active(false);
       }
       int err = checkMove();
-      if (words.size() == 0) finish.setText("Pass");
-      else finish.setText("Move OK");
       if (err != 0) {
         err(err, nonExistantWord);
         this.err = err;
-        if(words.size() == 0 && firstMove){
+        if (words.size() == 0 && firstMove) {
           finish.setActive(true);
           firstMovePass = true;
+          finish.setText("Pass");
         }
-      } else finish.setActive(true);
+      } else {
+        finish.setActive(true);
+        if (words.size() == 0) finish.setText("Pass");
+        else finish.setText("Move OK");
+      }
     }
   }
 
