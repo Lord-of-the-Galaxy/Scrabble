@@ -1,2 +1,2 @@
-# Scrabble
-A new try at building a better Scrabble
+# Scrabble AI Framework
+A framework for building an AI for this version of Scrabble
