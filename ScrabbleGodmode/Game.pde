@@ -2,6 +2,7 @@
 // tabe state game  
 
 boolean firstMove = true;
+boolean firstMovePass = false;
 
 void normalGame() {
 
@@ -44,6 +45,7 @@ void addPlayers() {
   for (int i = 1; i < players.length; i++) {
     players[i] = new SampleAIPlayer(this, i);//change this to name of you AI class
     players[i].name=names[i]; 
+    players[i].isPlayedByComputer = true;
     players[i].drawLetters();
   }
   

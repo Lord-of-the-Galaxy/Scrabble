@@ -11,13 +11,21 @@ abstract class AIPlayer extends Player implements Runnable{
   AIPlayer(PApplet p, int i) {
     super(p, i);
     actions = new ConcurrentLinkedQueue<Action>();
-    bar = new ProgressBar(new PVector(P_XOFF + S, index*P_H + 110), 7*S);
+    bar = new ProgressBar(new PVector(P_XOFF + S, index*P_H + 110), P_W - 2*S);
     bar.setColors(color(255), DARK_BLUE, LIGHT_BLUE);
     bar.setMinMax(0, 100);
     ai_grid = new AICell[15][15];
   }
 
   void displayActive() {
+    fill(LIGHT_GREEN);
+    stroke(DARK_GREEN);
+    strokeWeight(2);
+    float y = index*P_H + P_YOFF;
+    rect(P_XOFF, y, P_W, P_H_A, 6);
+    fill(0); 
+    textSize(0.5*P_H);
+    text(name, P_XOFF+4, y+P_H_A-10); 
     if (acting) {
       if (curA.execute())acting = false;
     } else {
@@ -63,7 +71,10 @@ abstract class AIPlayer extends Player implements Runnable{
   }
   
   void activate(){
-    for(int i = 0; i < 7; set[i++].activeForAI(true));
+    for(int i = 0; i < 7; i++){
+       set[i].activeForAI(true);
+       set[i].show();//only in this GODMODE version
+    }
     for(int i = 0; i < 15; i++){
       for(int j = 0; j < 15; j++){
         if(grid[i][j].empty)ai_grid[i][j] = new AICell(grid[i][j].type);
@@ -93,6 +104,10 @@ abstract class AIPlayer extends Player implements Runnable{
     int err = checkMove();
     if(err != 0){
       err(err, nonExistantWord);
+      if(words.size() == 0 && firstMove){
+        firstMovePass = true;
+        return;
+      }
       throw new RuntimeException("Error in AI - cannot continue further");
     }
   }

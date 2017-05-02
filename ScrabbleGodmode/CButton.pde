@@ -41,8 +41,8 @@ public abstract class Button {
       }
       rect(x, y, w, h, 4);
       fill(0);
-      textSize(h * 0.8);
-      text(text, x + w/2 - textWidth(text)/2, y + 0.9*h - 3);
+      textSize(h * 0.7);
+      text(text, x + w/2 - textWidth(text)/2, y + 0.85*h - 3);
       popStyle();
     }
   }
@@ -74,6 +74,11 @@ public abstract class Button {
     return mouseX > x && mouseX < (x + w) &&
       mouseY > y && mouseY < (y + h);
   }
+  
+  public void setText(String txt){
+    text = txt;
+  }
+  
   abstract void pressed() ;
 }
 //

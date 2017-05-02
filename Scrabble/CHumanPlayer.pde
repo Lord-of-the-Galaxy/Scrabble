@@ -44,7 +44,7 @@ class HumanPlayer extends Player {
     rect(P_XOFF, y, P_W, P_H_A, 6);
     fill(0); 
     textSize(0.5*P_H);
-    text(name + (isPlayedByComputer ? " (AI)" : ""), P_XOFF+4, y+P_H_A-10); 
+    text(name, P_XOFF+4, y+P_H_A-10); 
     if (finish.visible && !finish.active && finish.hover()) {
       pushStyle();
       textAlign(CENTER, CENTER);      
@@ -69,9 +69,15 @@ class HumanPlayer extends Player {
         set[i].active(false);
       }
       int err = checkMove();
+      if (words.size() == 0) finish.setText("Pass");
+      else finish.setText("Move OK");
       if (err != 0) {
         err(err, nonExistantWord);
         this.err = err;
+        if(words.size() == 0 && firstMove){
+          finish.setActive(true);
+          firstMovePass = true;
+        }
       } else finish.setActive(true);
     }
   }

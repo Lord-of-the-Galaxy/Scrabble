@@ -35,7 +35,7 @@ abstract class Player {
   void draw() {
 
     // draw player 
-    
+
     pushStyle();
     if (activePlayer != index) {
       fill(LIGHT_GREEN);
@@ -47,7 +47,7 @@ abstract class Player {
       rect(P_XOFF, y, P_W, P_H, 6);
       fill(0); 
       textSize(0.5*P_H);
-      text(name + (isPlayedByComputer ? " (AI)" : ""), P_XOFF+4, y+P_H-10); 
+      text(name + (isPlayedByComputer ? " (AI)" : ""), P_XOFF+4, y+P_H-10);
     } else {
       displayActive();
       if (checked) {
@@ -62,10 +62,10 @@ abstract class Player {
     text(score, P_XOFF + P_W - 25 - textWidth(str(score))/2, y+P_H + (activePlayer==index?P_H_A-P_H:0) -10);
     popStyle();
   }
-  
-  
+
+
   abstract void displayActive();//Human and AI have different
-  
+
   void drawLetters() {
 
     int x = (int)P_XOFF + 40;
@@ -83,6 +83,7 @@ abstract class Player {
 
   @SuppressWarnings("null")
     int checkMove() {
+    checked = false;
     words.clear();
     ArrayList<Cell> cells_temp = new ArrayList<Cell>();
     for (int i = 0; i < 7; i++) {
@@ -257,7 +258,10 @@ abstract class Player {
     for (int i = 0; i < words.size(); i++) {
       score+=words.get(i).score;
     }
-    if (firstMove)firstMove = false;
+    if (firstMove) {
+      if (firstMovePass)firstMovePass = false;
+      else firstMove = false;
+    }
     checked = false;
     deactivate();
   }
@@ -267,7 +271,7 @@ abstract class Player {
   void deactivate() {
     activePlayer = (index+1)%players.length;
     players[activePlayer].activate();
-    for(int i = 0; i < 7; i++){
+    for (int i = 0; i < 7; i++) {
       set[i].hide();
     }
   }

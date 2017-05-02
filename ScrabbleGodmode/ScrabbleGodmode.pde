@@ -10,7 +10,7 @@ import javax.swing.JOptionPane;
 // Open the Game tab to instantiate your AIs
 
 
-final static boolean GODMODE = true;//set to true if you want to load a situation, example provided in "data/situations/" folder
+final static boolean GODMODE = false;//set to true if you want to load a situation, example provided in "data/situations/" folder
 
 // main tab
 
@@ -20,7 +20,7 @@ final static float S = 40;
 // what is this ? 
 final static float XOFF = 15, YOFF = 15;
 
-final static float P_XOFF = 640, P_YOFF = 30, P_W = 440, P_H = 80, P_H_A = 165;
+final static float P_XOFF = 640, P_YOFF = 30, P_W = 400, P_H = 50, P_H_A = 165;
 
 final static float ST_Y = 480, ST_H = 220, ST_W = 440; 
 
