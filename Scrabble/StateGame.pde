@@ -2,6 +2,7 @@
 // tabe state game  
 
 boolean firstMove = true;
+boolean firstMovePass = false;
 
 void normalGame() {
 

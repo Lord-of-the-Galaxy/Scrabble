@@ -114,11 +114,38 @@ class HumanPlayer {
     }
   }
 
-  void ok() {
+  /*void ok() {
     int err = checkMove();
     if (err != 0) {
       err(err, nonExistantWord);
       this.err = err;
+    }
+  }*/
+  
+  void ok() {
+    if (!reverting) {
+      finish.setVisible(true);
+      finish.setActive(false);
+      revert.setVisible(true);
+      ok.setVisible(false);
+
+      for (int i = 0; i < 7; i++) {
+        set[i].active(false);
+      }
+      int err = checkMove();
+      if (err != 0) {
+        err(err, nonExistantWord);
+        this.err = err;
+        if (words.size() == 0 && firstMove) {
+          finish.setActive(true);
+          firstMovePass = true;
+          finish.setText("Pass");
+        }
+      } else {
+        finish.setActive(true);
+        if (words.size() == 0) finish.setText("Pass");
+        else finish.setText("Move OK");
+      }
     }
   }
 
@@ -310,7 +337,10 @@ class HumanPlayer {
     for (int i = 0; i < words.size(); i++) {
       score+=words.get(i).score;
     }
-    if (firstMove)firstMove = false;
+    if (firstMove){
+      if(firstMovePass)firstMovePass = false;
+      else firstMove = false;
+    }
     deactivate();
   }
 

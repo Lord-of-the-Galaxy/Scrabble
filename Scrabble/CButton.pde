@@ -73,6 +73,11 @@ public abstract class Button {
     return mouseX > x && mouseX < (x + w) &&
       mouseY > y && mouseY < (y + h);
   }
+  
+  public void setText(String txt){
+    text = txt;
+  }
+  
   abstract void pressed() ;
 }
 //
