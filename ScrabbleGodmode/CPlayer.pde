@@ -35,7 +35,7 @@ abstract class Player {
   void draw() {
 
     // draw player 
-    
+
     pushStyle();
     if (activePlayer != index) {
       fill(LIGHT_GREEN);
@@ -47,7 +47,7 @@ abstract class Player {
       rect(P_XOFF, y, P_W, P_H, 6);
       fill(0); 
       textSize(0.5*P_H);
-      text(name + (isPlayedByComputer ? " (AI)" : ""), P_XOFF+4, y+P_H-10); 
+      text(name + (isPlayedByComputer ? " (AI)" : ""), P_XOFF+4, y+P_H-10);
     } else {
       displayActive();
       if (checked) {
@@ -62,10 +62,10 @@ abstract class Player {
     text(score, P_XOFF + P_W - 25 - textWidth(str(score))/2, y+P_H + (activePlayer==index?P_H_A-P_H:0) -10);
     popStyle();
   }
-  
-  
+
+
   abstract void displayActive();//Human and AI have different
-  
+
   void drawLetters() {
 
     int x = (int)P_XOFF + 40;
@@ -258,8 +258,8 @@ abstract class Player {
     for (int i = 0; i < words.size(); i++) {
       score+=words.get(i).score;
     }
-    if (firstMove){
-      if(firstMovePass)firstMovePass = false;
+    if (firstMove) {
+      if (firstMovePass)firstMovePass = false;
       else firstMove = false;
     }
     checked = false;
@@ -271,7 +271,7 @@ abstract class Player {
   void deactivate() {
     activePlayer = (index+1)%players.length;
     players[activePlayer].activate();
-    for(int i = 0; i < 7; i++){
+    for (int i = 0; i < 7; i++) {
       set[i].hide();
     }
   }
@@ -451,5 +451,36 @@ abstract class Player {
       if (!checked.hasValue(all[n].j))throw new DiscontinuousWordException();
     }
     return w;
+  }
+
+
+  //*********************************************************************** GODMODE ONLY *******************************************************************
+  int li = 0;
+
+  void giveLetter(Letter l) {
+    if(li == 7){
+      println("Strange!");
+      return;
+    }
+    set[li] = l;
+    int x = (int)P_XOFF + 40;
+    int y = (int)(P_YOFF + this.index*P_H  + S*0.9);
+    set[li].show(x + (int)(S+2)*li, y);
+    set[li].player(this, li);
+    set[li].hide();
+    li++;
+  }
+
+  void drawLettersGodmode() {
+    int x = (int)P_XOFF + 40;
+    int y = (int)(P_YOFF + this.index*P_H  + S*0.9);
+    for (int i = li; i < 7; i++) {
+      int r = (int)random(pile.size());
+      set[i] = pile.get(r);
+      pile.remove(r);
+      set[i].show(x + (int)(S+2)*i, y);
+      set[i].player(this, i);
+      set[i].hide();
+    }
   }
 }

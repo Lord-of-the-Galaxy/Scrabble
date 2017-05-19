@@ -95,7 +95,7 @@ class Letter {
         s = JOptionPane.showInputDialog("Enter the value you want to use for the blank:");
         if (s == null)continue;
         s = s.toUpperCase();
-        if ((int)s.charAt(0) >= 65 && (int)s.charAt(0) <= 90)c = s.charAt(0);
+        if ((int)s.charAt(0) >= 65 && (int)s.charAt(0) <= 90)setVal(s.charAt(0));
       }
       if (c == ' ')JOptionPane.showMessageDialog(null, "Failed to set a character to blank", "Try again!", JOptionPane.ERROR_MESSAGE);
       else val = c;
@@ -118,28 +118,16 @@ class Letter {
   void mouseReleased() {
     if (visible && active && dragging) {
       dragging = false;
-      Cell c = closestCell(this);
-      if (c != null) {
-        x = int(c.i*S + XOFF + S/2);
-        y = int(c.j*S + YOFF + S/2);
-        if (c.empty)c.put(this);
-        else {
-          x = (int)P_XOFF + 40 + set_i*(int)(S+2);
-          y = (int)(P_YOFF + p.index*P_H  + S*0.9);
-        }
-      } else {
-        x = (int)P_XOFF + 40 + set_i*(int)(S+2);
-        y = (int)(P_YOFF + p.index*P_H  + S*0.9);
-      }
+      pushToClosest();
     }
-    //more logic to come
+    //TODO - better animations
   }
-  
-  Letter show(){
+
+  Letter show() {
     visible = true;
     return this;
   }
-  
+
   Letter show(int x_, int y_) {
     visible = true;
     x = x_;
@@ -159,7 +147,7 @@ class Letter {
   }
 
   void setVal(char c) {
-    if (blank)val = c;
+    if (blank && (active || activeForAI))val = c;
     else err(311, this);
   }
 
@@ -170,6 +158,22 @@ class Letter {
 
   void activeForAI(boolean a) {
     activeForAI = a;
+  }
+
+  void pushToClosest() {
+    Cell c = closestCell(this);
+    if (c != null) {
+      x = int(c.i*S + XOFF + S/2);
+      y = int(c.j*S + YOFF + S/2);
+      if (c.empty)c.put(this);
+      else {
+        x = (int)P_XOFF + 40 + set_i*(int)(S+2);
+        y = (int)(P_YOFF + p.index*P_H  + S*0.9);
+      }
+    } else {
+      x = (int)P_XOFF + 40 + set_i*(int)(S+2);
+      y = (int)(P_YOFF + p.index*P_H  + S*0.9);
+    }
   }
 }
 

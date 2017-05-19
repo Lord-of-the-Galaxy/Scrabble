@@ -10,7 +10,8 @@ import javax.swing.JOptionPane;
 // Open the Game tab to instantiate your AIs
 
 
-final static boolean GODMODE = false;//set to true if you want to load a situation, example provided in "data/situations/" folder
+final static boolean GODMODE = true;//set to true if you want to load a situation, example provided in "data/situations/" folder
+final static boolean GODMODE_SHOW = true;//set to true if you want to show letters of AI
 
 // main tab
 
@@ -75,7 +76,7 @@ void setup() {
   
   if(GODMODE){
     loadProgram();
-    firstMove = false;//VERY IMPORTANT THAT THE STAR IS COVERED IN THE SITUATION
+    firstMove = false;//VERY IMPORTANT THAT THE STAR IS COVERED IN THE SITUATION, OTHERWISE THIS WILL LEAD TO SMALL PROBLEMS
   }
   
   addPlayers();

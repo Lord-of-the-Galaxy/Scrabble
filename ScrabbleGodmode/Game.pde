@@ -30,24 +30,48 @@ void normalGame() {
 //
 
 void addPlayers() {
-  
-  //make array
-  players = new Player[2];//change if you know what you're doing
+  if (!playersLoaded) {
+    //make array
+    players = new Player[playersN];//change, but only if you know what you're doing
 
-  //define players
+    //define players
 
-  String[] names = {"You", "AI 1", "AI 2", "AI3"};
+    String[] names = {"You", "AI 1", "AI 2", "AI3"};
 
-  players[0] = new HumanPlayer(this, 0);
-  players[0].name = names[0];
-  players[0].drawLetters();
-  
-  for (int i = 1; i < players.length; i++) {
-    players[i] = new SampleAIPlayer(this, i);//change this to name of you AI class
-    players[i].name=names[i]; 
-    players[i].isPlayedByComputer = true;
-    players[i].drawLetters();
+    players[0] = new HumanPlayer(this, 0);
+    players[0].name = names[0];
+    players[0].drawLetters();
+
+    for (int i = 1; i < players.length; i++) {
+      players[i] = new SampleAIPlayer(this, i);//change this to name of you AI class
+      players[i].name=names[i]; 
+      players[i].isPlayedByComputer = true;
+      players[i].drawLetters();
+    }
+
+    players[0].activate();
+  } else {
+    //make array
+    players = new Player[playersN];//change, but only if you know what you're doing
+    
+    //define players
+
+    String[] names = {"You", "AI 1", "AI 2", "AI 3"};
+
+    players[0] = new HumanPlayer(this, 0);
+    players[0].name = names[0];
+
+    for (int i = 1; i < players.length; i++) {
+      players[i] = new SampleAIPlayer(this, i);//change this to name of you AI class
+      players[i].name=names[i]; 
+      players[i].isPlayedByComputer = true;
+    }
+
+    giveAllLetters();
+    players[0].drawLettersGodmode();
+    for (int i = 1; i < players.length; i++) {
+      players[i].drawLettersGodmode();
+    }
+    players[0].activate();
   }
-  
-  players[0].activate();
 }

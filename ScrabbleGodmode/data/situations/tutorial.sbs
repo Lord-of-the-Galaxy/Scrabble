@@ -8,14 +8,14 @@ See
 */
 
 /*
-The state of the board starts and ends with '*B'. 
+The state of the board starts with "B*" and ends with "*B". 
 It must have atleast 15 lines in between, but extra lines are ignored.
 Each line must contain 15 characters, but extra characters are ignored.
 Any mistakes in syntax will lead to errors.
-'-' will leave the cell empty, otherwise it will be filled with the given letter
+"-" will leave the cell empty, otherwise it will be filled with the given letter
 */
 
-*B
+B*
 --------------- 
 ---------------
 ---------------
@@ -33,11 +33,12 @@ Any mistakes in syntax will lead to errors.
 ---------------
 *B
 
-// No of players if defined as such (3 here) - 
-*P 3
+// No of players if defined as such (4 here, min 2, max 4) - 
+*P 4
+// If number of players is not defined, letters for players cannot be set
 
-// Player letters are defined as such (the number after *P refers to which player - 
-*P1 AOLIK_S //where _ is a blank. More than 7 letters are ignored, but if less than 7 are defined, new letters will be added from pile when possible
+// Player letters are defined as such (the number after "*P" refers to which player - 
+*P1 AOLIK_S //where "_" is a blank. More than 7 letters are ignored, but if less than 7 are defined, new letters will be added from pile when possible
 
 // Despite @Chrisir's wishes, I decided that letting the AI have all 7 letters is more correct, than allowing user to make the AI have fewer letters at start.
 // This was because I reasoned that a good AI will depend a bit on judging what letters remain in pile + players pool.
@@ -49,6 +50,4 @@ Any mistakes in syntax will lead to errors.
 // You can also skip a player, they will be assigned letters from the pile - 
 *P3 HUTJYFD //Player 2 is skipped here
 
-
-
-
+*P4 AGH //Not all letters asigned here, rest will be random
